@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Injection La Paz | Expertos en Inyección Automotriz</title>
+    
+    <!-- Meta etiquetas para SEO -->
+    <meta name="description" content="Especialistas en inyección automotriz con más de 25 años de experiencia. Limpieza de inyectores, diagnóstico avanzado y mecánica general en La Paz.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #ffff00; /* Amarillo */
+            --bg-dark: #0f0f0f;
+            --bg-card: #1a1a1a;
+            --text-light: #f4f4f4;
+            --text-gray: #a0a0a0;
+            --white: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            /* Evita que el encabezado fijo tape el contenido al usar anclas */
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Nav --- */
+        header {
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 2%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 65px;
+            width: auto;
+            border-radius: 4px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: var(--white);
+            letter-spacing: -1px;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), 
+                        url('https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 6vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 2rem;
+            max-width: 1000px;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .cta-button {
+            padding: 1.2rem 2.5rem;
+            background-color: var(--primary);
+            color: #000;
+            text-decoration: none;
+            font-weight: 900;
+            border-radius: 4px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(204, 255, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(204, 255, 0, 0.4);
+            background-color: #e2ff4d;
+        }
+
+        /* --- Global Sections --- */
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 3.5rem;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 5px;
+            background: var(--primary);
+            margin: 15px auto;
+        }
+
+        /* --- About --- */
+        .about-content {
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-gray);
+        }
+
+        .about-content strong {
+            color: var(--white);
+        }
+
+        /* --- Services --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            padding: 45px 35px;
+            border-radius: 12px;
+            border: 1px solid #222;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-8px);
+            background: #222;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.4rem;
+            text-transform: uppercase;
+        }
+
+        .services-image-container {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .services-image-container img {
+            max-width: 800px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+        }
+
+        /* --- Reviews Section --- */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 2rem;
+        }
+
+        .review-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .review-card:hover {
+            background: #222;
+            transform: translateY(-5px);
+        }
+
+        .stars {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .review-author {
+            display: block;
+            margin-top: 15px;
+            font-weight: 700;
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        /* --- Promo Banner --- */
+        .guarantee-banner {
+            background: var(--primary);
+            color: #000;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .guarantee-banner h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        /* --- Contact --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact-info div {
+            margin-bottom: 30px;
+        }
+
+        .contact-info h4 {
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .contact-info p, .social-link {
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+
+        .social-link {
+            color: var(--white);
+            font-weight: 700;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-link:hover {
+            color: var(--primary);
+        }
+
+        .map-placeholder iframe {
+            width: 100%;
+            height: 350px;
+            border: 0;
+            border-radius: 12px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 60px 10% 30px;
+            background: #050505;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: 30px;
+            opacity: 0.7;
+        }
+
+        .footer-logo img {
+            height: 35px;
+            width: auto;
+        }
+
+        /* --- Floating WhatsApp --- */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            background-color: #128c7e;
+            color: #FFF;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            .logo {
+                margin-bottom: 1rem;
+            }
+            nav ul {
+                gap: 0.8rem;
+            }
+            nav a {
+                font-size: 0.75rem;
+            }
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            section {
+                padding: 80px 6%;
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#inicio" class="logo">
+            <img src="assets/multi injection logo.jpg" alt="Multi Injection La Paz Logo">
+            <div class="logo-text">MULTI<span>INJECTION</span></div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <h1>Expertos en <span>Inyección</span> con más de 30 años de trayectoria</h1>
+            <a href="https://wa.me/584129386617?text=Hola%20vengo%20de%20la%20pagina%20web%2C%20me%20interesa%20saber%20informacion%20de..." class="cta-button" target="_blank" rel="noopener">Agendar Cita vía WhatsApp</a>
+        </section>
+
+        <section id="nosotros">
+            <h2 class="section-title">Sobre Nosotros</h2>
+            <div class="about-content">
+                <p>En <strong>Multi Injection La Paz</strong>, fusionamos décadas de experiencia artesanal con la tecnología de diagnóstico más sofisticada del mercado. Nos especializamos en restaurar la potencia original de su motor, trabajando bajo estrictos estándares de precisión automotriz.</p>
+            </div>
+        </section>
+
+        <section id="servicios">
+            <h2 class="section-title">Servicios Especializados</h2>
+            <div class="services-grid">
+                <article class="service-card">
+                    <h3>Limpieza de Inyectores</h3>
+                    <p>Limpieza profunda por ultrasonido y prueba en banco para garantizar una atomización perfecta y ahorro de combustible.</p>
+                </article>
+                <article class="service-card">
+                    <h3>Diagnóstico Avanzado</h3>
+                    <p>Escaneo computarizado de última generación para identificar fallas en sensores, actuadores y módulos de control.</p>
+                </article>
+                <article class="service-card">
+                    <h3>Mantenimiento Preventivo</h3>
+                    <p>Servicios de afinación, cambio de fluidos y filtros utilizando insumos de alta gama para prolongar la vida del motor.</p>
+                </article>
+                <article class="service-card">
+                    <h3>Sistemas de Combustible</h3>
+                    <p>Diagnóstico de presión, reemplazo de bombas de gasolina y limpieza de tanques para un flujo óptimo.</p>
+                </article>
+                <article class="service-card">
+                    <h3>Mecánica de Precisión</h3>
+                    <p>Desde reparaciones menores hasta reconstrucciones parciales de motor con garantía certificada.</p>
+                </article>
+                <article class="service-card">
+                    <h3>Electrónica Automotriz</h3>
+                    <p>Resolución de problemas complejos en el ramal eléctrico, cortos circuitos y configuración de módulos.</p>
+                </article>
+            </div>
+            <div class="services-image-container">
+                <img src="assets/inyectores.jpg" alt="Inyectores profesionales">
+            </div>
+        </section>
+
+        <div class="guarantee-banner">
+            <h2>1 MES DE GARANTÍA TOTAL</h2>
+            <p>Respaldamos cada intervención técnica con un compromiso real de calidad.</p>
+        </div>
+
+        <section id="testimonios">
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Excelente servicio, muy profesionales. Limpiaron los inyectores de mi camioneta y quedó como nueva. Recomendados."</p>
+                    <span class="review-author">- Carlos Rodríguez</span>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"La mejor atención en Caracas para sistemas de inyección. Diagnóstico preciso y sin rodeos. Muy honestos."</p>
+                    <span class="review-author">- María García</span>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"25 años de experiencia se notan en el trato y la calidad del trabajo. Solucionaron una falla que nadie encontraba."</p>
+                    <span class="review-author">- Ricardo Mendoza</span>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://www.google.com/maps/search/?api=1&query=Multi+Injection+La+Paz+F3M2%2BQJ+Caracas" target="_blank" rel="noopener" class="social-link" style="border: 1px solid var(--primary); padding: 10px 20px; border-radius: 5px;">
+                    ABRIR EN MAPS
+                </a>
+            </div>
+        </section>
+
+        <section id="contacto">
+            <h2 class="section-title">Contacto y Ubicación</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div>
+                        <h4>Ubicación</h4>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Multi+Injection+La+Paz+F3M2%2BQJ+Caracas" target="_blank" rel="noopener" class="social-link">
+                            Avenida La Paz, frente a la estación del metro.<br>Caracas, Venezuela.
+                        </a>
+                    </div>
+                    <div>
+                        <h4>Atención Directa</h4>
+                        <a href="https://wa.me/584129386617?text=Hola%20vengo%20de%20la%20pagina%20web%2C%20me%20interesa%20saber%20informacion%20de..." target="_blank" rel="noopener" class="social-link">0412-9386617</a>
+                    </div>
+                    <div>
+                        <h4>Comunidad</h4>
+                        <a href="https://www.instagram.com/multiinjection/" class="social-link" target="_blank" rel="noopener">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                            @multiinjection
+                        </a>
+                    </div>
+                    <div>
+                        <h4>Cómo llegar</h4>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=F3M2%2BQJ+Caracas" target="_blank" rel="noopener" class="social-link" aria-label="Iniciar navegación GPS a Multi Injection La Paz">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
+                                <circle cx="12" cy="9" r="3"></circle>
+                            </svg>
+                            Iniciar Navegación
+                        </a>
+                    </div>
+                </div>
+                <div class="map-placeholder">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.18181647413!2d-66.94553222530365!3d10.48529249581884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a5f782f041267%3A0xc47e38f97204968!2sMulti%20Injection%20La%20Paz!5e0!3m2!1ses!2sve!4v1740000000000!5m2!1ses!2sve"
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+        <p>&copy; 2026 Multi Injection La Paz.</p>
+        <div class="footer-logo">
+            <img src="assets/multi injection logo.jpg" alt="Logo Multi Injection">
+            <span style="font-weight: 700; color: #aaa;">MULTI INJECTION LA PAZ</span>
+        </div>
+    </footer>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/584129386617?text=Hola%20vengo%20de%20la%20pagina%20web%2C%20me%20interesa%20saber%20informacion%20de..." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.63 1.438h.004c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+</body>
+</html>
