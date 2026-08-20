@@ -472,53 +472,105 @@
             color: var(--text-3);
         }
 
-        /* --- Reviews Section --- */
-        .reviews-grid {
+        /* --- Garantía: los 30 años como cifra grande y sola --- */
+        .garantia {
+            background: var(--accent);
+            color: var(--on-accent);
+            padding-block: 44px;
+        }
+
+        .garantia-inner {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 2rem;
+            gap: 26px;
         }
 
-        .review-card {
-            background: var(--bg-card);
-            padding: 30px;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary);
-            transition: var(--transition);
+        .cifra {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
         }
 
-        .review-card:hover {
-            background: #222;
-            transform: translateY(-5px);
-        }
-
-        .stars {
-            color: var(--primary);
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-        }
-
-        .review-author {
-            display: block;
-            margin-top: 15px;
+        .cifra-num {
+            font-family: var(--font-titulo);
+            font-size: clamp(4.6rem, 23vw, 8rem);
             font-weight: 700;
-            color: var(--white);
-            font-size: 0.9rem;
+            line-height: 0.8;
+            letter-spacing: -0.045em;
         }
 
-        /* --- Promo Banner --- */
-        .guarantee-banner {
-            background: var(--primary);
-            color: #000;
-            padding: 80px 20px;
-            text-align: center;
+        .cifra-mas {
+            font-family: var(--font-titulo);
+            font-size: clamp(2rem, 9vw, 3rem);
+            font-weight: 700;
+            line-height: 1;
+            opacity: 0.55;
         }
 
-        .guarantee-banner h2 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 900;
-            margin-bottom: 10px;
+        .cifra-pie {
+            font-family: var(--font-dato);
+            font-size: 0.7rem;
+            letter-spacing: 0.16em;
+            line-height: 1.35;
+            text-transform: uppercase;
+            max-width: 10ch;
+        }
+
+        .garantia-texto h2 {
+            font-family: var(--font-titulo);
+            font-size: clamp(1.5rem, 6.5vw, 2.2rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.015em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .garantia-texto p { max-width: 46ch; }
+
+        /* --- Testimonios --- */
+        .resenas {
+            display: grid;
+            gap: 14px;
+        }
+
+        .resena {
+            background: var(--ink-800);
+            border: 1px solid var(--line);
+            border-top: 2px solid var(--accent);
+            padding: 22px 20px;
+        }
+
+        /* Más específico que `.resena p`, si no las estrellas salen grises. */
+        .resena .estrellas {
+            color: var(--accent);
+            font-size: 0.95rem;
+            letter-spacing: 0.16em;
+            margin-bottom: 14px;
+        }
+
+        .resena p {
+            color: var(--text-2);
+            font-size: 0.95rem;
+            line-height: 1.55;
+        }
+
+        .resena cite {
+            display: block;
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid var(--line);
+            font-family: var(--font-dato);
+            font-size: 0.7rem;
+            font-style: normal;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-1);
+        }
+
+        .resenas-pie {
+            margin-top: 26px;
+            display: flex;
+            justify-content: center;
         }
 
         /* --- Contact --- */
@@ -671,12 +723,24 @@
                 border-left: 1px solid var(--line);
             }
             .servicios-figura { max-width: 820px; }
+
+            .garantia-inner {
+                grid-template-columns: auto 1fr;
+                gap: 52px;
+                align-items: center;
+            }
+            .garantia-texto {
+                border-left: 1px solid rgba(11, 14, 15, 0.28);
+                padding-left: 52px;
+            }
+            .resenas { grid-template-columns: repeat(3, 1fr); gap: 20px; }
         }
 
         @media (min-width: 900px) {
             :root { --alto-header: 72px; --pad-lado: 40px; }
             .sec { padding-block: 96px; }
             .about-content { font-size: 1.15rem; }
+            .garantia { padding-block: 64px; }
             .logo img { height: 46px; }
             nav ul { gap: 6px; }
             nav a { font-size: 0.78rem; padding: 10px 14px; }
@@ -826,34 +890,46 @@
             </div>
         </section>
 
-        <div class="guarantee-banner">
-            <h2>1 MES DE GARANTÍA TOTAL</h2>
-            <p>Respaldamos cada intervención técnica con un compromiso real de calidad.</p>
-        </div>
-
-        <section id="testimonios">
-            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Excelente servicio, muy profesionales. Limpiaron los inyectores de mi camioneta y quedó como nueva. Recomendados."</p>
-                    <span class="review-author">- Carlos Rodríguez</span>
-                </div>
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"La mejor atención en Caracas para sistemas de inyección. Diagnóstico preciso y sin rodeos. Muy honestos."</p>
-                    <span class="review-author">- María García</span>
-                </div>
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"25 años de experiencia se notan en el trato y la calidad del trabajo. Solucionaron una falla que nadie encontraba."</p>
-                    <span class="review-author">- Ricardo Mendoza</span>
+        <section class="garantia" aria-labelledby="garantia-titulo">
+            <div class="wrap garantia-inner">
+                <p class="cifra">
+                    <span class="cifra-mas" aria-hidden="true">+</span>
+                    <span class="cifra-num">30</span>
+                    <span class="cifra-pie">Años de trayectoria</span>
+                </p>
+                <div class="garantia-texto">
+                    <h2 id="garantia-titulo">1 MES DE GARANTÍA TOTAL</h2>
+                    <p>Respaldamos cada intervención técnica con un compromiso real de calidad.</p>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="https://www.google.com/maps/search/?api=1&query=Multi+Injection+La+Paz+F3M2%2BQJ+Caracas" target="_blank" rel="noopener" class="social-link" style="border: 1px solid var(--primary); padding: 10px 20px; border-radius: 5px;">
-                    ABRIR EN MAPS
-                </a>
+        </section>
+
+        <section id="testimonios" class="sec">
+            <div class="wrap">
+                <div class="sec-head">
+                    <span class="sec-num">03 / Testimonios</span>
+                    <h2 class="sec-title">Lo que dicen nuestros clientes</h2>
+                </div>
+                <div class="resenas">
+                    <blockquote class="resena">
+                        <p class="estrellas" role="img" aria-label="Calificación: 5 de 5 estrellas"><span aria-hidden="true">★★★★★</span></p>
+                        <p>"Excelente servicio, muy profesionales. Limpiaron los inyectores de mi camioneta y quedó como nueva. Recomendados."</p>
+                        <cite>Carlos Rodríguez</cite>
+                    </blockquote>
+                    <blockquote class="resena">
+                        <p class="estrellas" role="img" aria-label="Calificación: 5 de 5 estrellas"><span aria-hidden="true">★★★★★</span></p>
+                        <p>"La mejor atención en Caracas para sistemas de inyección. Diagnóstico preciso y sin rodeos. Muy honestos."</p>
+                        <cite>María García</cite>
+                    </blockquote>
+                    <blockquote class="resena">
+                        <p class="estrellas" role="img" aria-label="Calificación: 5 de 5 estrellas"><span aria-hidden="true">★★★★★</span></p>
+                        <p>"25 años de experiencia se notan en el trato y la calidad del trabajo. Solucionaron una falla que nadie encontraba."</p>
+                        <cite>Ricardo Mendoza</cite>
+                    </blockquote>
+                </div>
+                <div class="resenas-pie">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Multi+Injection+La+Paz+F3M2%2BQJ+Caracas" target="_blank" rel="noopener" class="btn btn-ghost">Abrir en Maps</a>
+                </div>
             </div>
         </section>
 
