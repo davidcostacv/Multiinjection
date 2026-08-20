@@ -731,6 +731,34 @@
             color: var(--text-3);
         }
 
+        /* --- Foto del taller, junto al mapa --- */
+        .contacto-visual {
+            display: grid;
+            gap: 20px;
+            align-content: start;
+        }
+
+        .taller-foto {
+            border: 1px solid var(--line);
+            background: var(--ink-800);
+        }
+
+        .taller-foto img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .taller-foto figcaption {
+            border-top: 1px solid var(--line);
+            padding: 12px 16px;
+            font-family: var(--font-dato);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+
         /* --- Mapa diferido ---
            El embed de Google arrastra varios cientos de KB de JavaScript. En
            una conexión de datos cara eso no se cobra hasta que hace falta: se
@@ -948,6 +976,16 @@
                 align-items: start;
             }
             .mapa { height: 440px; }
+
+            /* En vertical y a 605px de ancho la foto se iba a 804px de alto y
+               dejaba la columna de datos con un hueco enorme al lado. El
+               recorte además mejora el encuadre: sobra cielo arriba y asfalto
+               abajo, y lo que importa (el letrero y la bahía) queda centrado. */
+            .taller-foto img {
+                height: 380px;
+                object-fit: cover;
+                object-position: 50% 46%;
+            }
 
             .footer-fondo { justify-content: space-between; }
         }
@@ -1214,15 +1252,29 @@
                         </div>
                     </dl>
 
-                    <div class="mapa" id="mapa" data-mapa-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.18181647413!2d-66.94553222530365!3d10.48529249581884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a5f782f041267%3A0xc47e38f97204968!2sMulti%20Injection%20La%20Paz!5e0!3m2!1ses!2sve!4v1740000000000!5m2!1ses!2sve">
-                        <button type="button" class="mapa-boton" id="mapa-boton">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path><circle cx="12" cy="9" r="3"></circle></svg>
-                            <strong>Ver el mapa</strong>
-                            <small>Lo carga Google y pesa varios cientos de KB. Se abre solo cuando lo necesitas.</small>
-                        </button>
-                        <noscript>
-                            <p class="mapa-noscript"><a href="https://www.google.com/maps/search/?api=1&query=Multi+Injection+La+Paz+F3M2%2BQJ+Caracas" target="_blank" rel="noopener">Abrir la ubicación en Google Maps</a></p>
-                        </noscript>
+                    <div class="contacto-visual">
+                        <div class="mapa" id="mapa" data-mapa-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.18181647413!2d-66.94553222530365!3d10.48529249581884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a5f782f041267%3A0xc47e38f97204968!2sMulti%20Injection%20La%20Paz!5e0!3m2!1ses!2sve!4v1740000000000!5m2!1ses!2sve">
+                            <button type="button" class="mapa-boton" id="mapa-boton">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path><circle cx="12" cy="9" r="3"></circle></svg>
+                                <strong>Ver el mapa</strong>
+                                <small>Lo carga Google y pesa varios cientos de KB. Se abre solo cuando lo necesitas.</small>
+                            </button>
+                            <noscript>
+                                <p class="mapa-noscript"><a href="https://www.google.com/maps/search/?api=1&query=Multi+Injection+La+Paz+F3M2%2BQJ+Caracas" target="_blank" rel="noopener">Abrir la ubicación en Google Maps</a></p>
+                            </noscript>
+                        </div>
+
+                        <figure class="taller-foto">
+                            <picture>
+                                <source media="(max-width: 859px)" type="image/webp" srcset="assets/taller-800.webp">
+                                <source media="(max-width: 859px)" srcset="assets/taller-800.jpg">
+                                <source type="image/webp" srcset="assets/taller-1200.webp">
+                                <img src="assets/taller-1200.jpg"
+                                     width="900" height="1200" loading="lazy" decoding="async"
+                                     alt="Fachada del taller Multi Injection La Paz sobre la Avenida La Paz: letrero con el nombre del taller, bahía de trabajo abierta con varios vehículos y estacionamiento al frente">
+                            </picture>
+                            <figcaption>El taller visto desde la Avenida La Paz</figcaption>
+                        </figure>
                     </div>
                 </div>
             </div>
