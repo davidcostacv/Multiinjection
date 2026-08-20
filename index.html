@@ -368,28 +368,6 @@
             color: var(--accent);
         }
 
-        /* --- Global Sections --- */
-        section {
-            padding: 100px 10%;
-        }
-
-        .section-title {
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
-            margin-bottom: 3.5rem;
-            text-align: center;
-            text-transform: uppercase;
-            font-weight: 900;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 5px;
-            background: var(--primary);
-            margin: 15px auto;
-        }
-
         /* Secciones ya migradas: la sangría lateral la pone .wrap, así que
            anulan el padding-inline de la regla heredada `section`. */
         .sec {
@@ -573,116 +551,211 @@
             justify-content: center;
         }
 
-        /* --- Contact --- */
-        .contact-container {
+        /* --- Contacto --- */
+        .contacto-grid { display: grid; gap: 36px; }
+
+        .datos { border-top: 1px solid var(--line); }
+
+        .dato {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
+            gap: 2px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--line);
         }
 
-        .contact-info div {
-            margin-bottom: 30px;
-        }
-
-        .contact-info h4 {
-            color: var(--primary);
+        .dato dt {
+            font-family: var(--font-dato);
+            font-size: 0.68rem;
+            letter-spacing: 0.16em;
             text-transform: uppercase;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            color: var(--accent);
         }
 
-        .contact-info p, .social-link {
-            font-size: 1.1rem;
+        .dato dd { color: var(--text-1); }
+
+        .dato a {
+            color: var(--text-1);
             text-decoration: none;
-        }
-
-        .social-link {
-            color: var(--white);
-            font-weight: 700;
-            transition: var(--transition);
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            min-height: 44px;      /* objetivo tactil minimo */
+            transition: color var(--transition);
         }
 
-        .social-link:hover {
-            color: var(--primary);
+        .dato a:hover { color: var(--accent); }
+
+        .dato svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            color: var(--accent);
         }
 
-        .map-placeholder iframe {
+        .dato .nota {
+            display: block;
+            font-family: var(--font-dato);
+            font-size: 0.7rem;
+            letter-spacing: 0.04em;
+            color: var(--text-3);
+        }
+
+        /* --- Mapa diferido ---
+           El embed de Google arrastra varios cientos de KB de JavaScript. En
+           una conexión de datos cara eso no se cobra hasta que hace falta: se
+           dibuja un marcador estático y el iframe se monta al entrar en
+           viewport o al tocarlo. */
+        .mapa {
+            position: relative;
+            /* Altura explícita, no aspect-ratio: combinado con un min-height,
+               Chrome ensancha la caja para respetar la proporción, desborda el
+               documento y eso estira el header fijo, que corta "Contacto". */
+            height: 320px;
+            border: 1px solid var(--line);
+            background-color: var(--ink-800);
+            /* Retícula de instrumento, dibujada en CSS: 0 KB de imagen. */
+            background-image:
+                linear-gradient(var(--line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--line) 1px, transparent 1px);
+            background-size: 32px 32px;
+            overflow: hidden;
+        }
+
+        .mapa iframe {
+            display: block;
             width: 100%;
-            height: 350px;
+            height: 100%;
             border: 0;
-            border-radius: 12px;
         }
 
-        /* --- Footer --- */
-        footer {
-            padding: 60px 10% 30px;
-            background: #050505;
+        .mapa-boton {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 24px;
+            background: transparent;
+            border: 0;
+            color: var(--text-1);
+            font-family: inherit;
             text-align: center;
+            cursor: pointer;
+        }
+
+        .mapa-boton svg { width: 34px; height: 34px; color: var(--accent); }
+
+        .mapa-boton strong {
+            font-family: var(--font-titulo);
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: color var(--transition);
+        }
+
+        .mapa-boton small {
+            font-family: var(--font-dato);
+            font-size: 0.68rem;
+            line-height: 1.5;
+            color: var(--text-3);
+            max-width: 32ch;
+        }
+
+        .mapa-boton:hover strong { color: var(--accent); }
+
+        .mapa-noscript {
+            position: absolute;
+            inset: auto 0 12px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        /* --- Pie --- */
+        footer {
+            background: var(--ink-900);
+            border-top: 1px solid var(--line);
+            padding-block: 36px 30px;
         }
 
         .footer-links {
-            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px 8px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--line);
         }
 
         .footer-links a {
-            color: var(--text-gray);
-            margin: 0 15px;
+            color: var(--text-2);
             text-decoration: none;
-            font-size: 0.85rem;
-            transition: var(--transition);
+            font-family: var(--font-titulo);
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            padding: 10px 8px;
+            transition: color var(--transition);
         }
 
-        .footer-links a:hover {
-            color: var(--primary);
-        }
+        .footer-links a:hover { color: var(--accent); }
 
-        .footer-logo {
+        .footer-fondo {
             display: flex;
-            justify-content: center;
             align-items: center;
             gap: 12px;
-            margin-top: 30px;
-            opacity: 0.7;
+            padding-top: 22px;
         }
 
-        .footer-logo img {
-            height: 35px;
-            width: auto;
+        .footer-fondo img { height: 40px; width: auto; }
+
+        .footer-marca {
+            font-family: var(--font-titulo);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--text-2);
+            line-height: 1.2;
         }
 
-        /* --- Floating WhatsApp --- */
+        .footer-legal {
+            margin-top: 18px;
+            font-family: var(--font-dato);
+            font-size: 0.68rem;
+            letter-spacing: 0.05em;
+            color: var(--text-3);
+        }
+
+        /* --- WhatsApp flotante: alcanzable con el pulgar en todo el scroll --- */
         .whatsapp-float {
             position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 40px;
-            right: 40px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 5px 15px rgba(0,0,0,0.3);
+            right: 16px;
+            /* Por encima de la barra de gestos de Android y iOS. */
+            bottom: max(16px, env(safe-area-inset-bottom, 0px));
             z-index: 1000;
+            width: 56px;
+            height: 56px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 50%;
+            background-color: var(--whatsapp);
+            color: #FFF;
             text-decoration: none;
-            transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+            transition: background-color var(--transition), transform var(--transition);
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.1) translateY(-5px);
-            background-color: #128c7e;
-            color: #FFF;
+            background-color: #1EB855;
+            transform: translateY(-2px);
         }
 
-        /* --- Responsive --- */
+        .whatsapp-float svg { width: 30px; height: 30px; }
+
         /* --- Escalado: se diseñó a 360px, de aquí para arriba se agranda --- */
         @media (min-width: 560px) {
             .hero-acciones .btn { flex: 0 0 auto; }
@@ -734,6 +807,15 @@
                 padding-left: 52px;
             }
             .resenas { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+            .contacto-grid {
+                grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+                gap: 48px;
+                align-items: start;
+            }
+            .mapa { height: 440px; }
+
+            .footer-fondo { justify-content: space-between; }
         }
 
         @media (min-width: 900px) {
@@ -741,26 +823,14 @@
             .sec { padding-block: 96px; }
             .about-content { font-size: 1.15rem; }
             .garantia { padding-block: 64px; }
+            .whatsapp-float { right: 28px; bottom: 28px; width: 60px; height: 60px; }
+            .mapa { height: 500px; }
             .logo img { height: 46px; }
             nav ul { gap: 6px; }
             nav a { font-size: 0.78rem; padding: 10px 14px; }
             .hero-eyebrow { font-size: 0.72rem; }
         }
 
-        @media (max-width: 768px) {
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-            section {
-                padding: 80px 6%;
-            }
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-                bottom: 20px;
-                right: 20px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -933,64 +1003,88 @@
             </div>
         </section>
 
-        <section id="contacto">
-            <h2 class="section-title">Contacto y Ubicación</h2>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <div>
-                        <h4>Ubicación</h4>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Multi+Injection+La+Paz+F3M2%2BQJ+Caracas" target="_blank" rel="noopener" class="social-link">
-                            Avenida La Paz, frente a la estación del metro.<br>Caracas, Venezuela.
-                        </a>
-                    </div>
-                    <div>
-                        <h4>Atención Directa</h4>
-                        <a href="https://wa.me/584129386617?text=Hola%20vengo%20de%20la%20pagina%20web%2C%20me%20interesa%20saber%20informacion%20de..." target="_blank" rel="noopener" class="social-link">0412-9386617</a>
-                    </div>
-                    <div>
-                        <h4>Comunidad</h4>
-                        <a href="https://www.instagram.com/multiinjection/" class="social-link" target="_blank" rel="noopener">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                            </svg>
-                            @multiinjection
-                        </a>
-                    </div>
-                    <div>
-                        <h4>Cómo llegar</h4>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=F3M2%2BQJ+Caracas" target="_blank" rel="noopener" class="social-link" aria-label="Iniciar navegación GPS a Multi Injection La Paz">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
-                                <circle cx="12" cy="9" r="3"></circle>
-                            </svg>
-                            Iniciar Navegación
-                        </a>
-                    </div>
+        <section id="contacto" class="sec">
+            <div class="wrap">
+                <div class="sec-head">
+                    <span class="sec-num">04 / Contacto</span>
+                    <h2 class="sec-title">Contacto y Ubicación</h2>
                 </div>
-                <div class="map-placeholder">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.18181647413!2d-66.94553222530365!3d10.48529249581884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a5f782f041267%3A0xc47e38f97204968!2sMulti%20Injection%20La%20Paz!5e0!3m2!1ses!2sve!4v1740000000000!5m2!1ses!2sve"
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
+                <div class="contacto-grid">
+                    <dl class="datos">
+                        <div class="dato">
+                            <dt>Ubicación</dt>
+                            <dd>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Multi+Injection+La+Paz+F3M2%2BQJ+Caracas" target="_blank" rel="noopener">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path><circle cx="12" cy="9" r="3"></circle></svg>
+                                    <span>Avenida La Paz, frente a la estación del metro.<br>Caracas, Venezuela.</span>
+                                </a>
+                                <span class="nota">Plus code F3M2+QJ</span>
+                            </dd>
+                        </div>
+                        <div class="dato">
+                            <dt>Horario</dt>
+                            <dd>
+                                Lunes a viernes, 8:00 a 16:00<br>Sábados, 8:00 a 13:00
+                                <span class="nota">Domingos cerrado</span>
+                            </dd>
+                        </div>
+                        <div class="dato">
+                            <dt>Atención Directa</dt>
+                            <dd>
+                                <a href="https://wa.me/584129386617?text=Hola%20vengo%20de%20la%20pagina%20web%2C%20me%20interesa%20saber%20informacion%20de..." target="_blank" rel="noopener">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.63 1.438h.004c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                                    0412-9386617
+                                </a>
+                            </dd>
+                        </div>
+                        <div class="dato">
+                            <dt>Comunidad</dt>
+                            <dd>
+                                <a href="https://www.instagram.com/multiinjection/" class="social-link" target="_blank" rel="noopener">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                    @multiinjection
+                                </a>
+                            </dd>
+                        </div>
+                        <div class="dato">
+                            <dt>Cómo llegar</dt>
+                            <dd>
+                                <a href="https://www.google.com/maps/dir/?api=1&destination=F3M2%2BQJ+Caracas" target="_blank" rel="noopener" aria-label="Iniciar navegación GPS a Multi Injection La Paz">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path><circle cx="12" cy="9" r="3"></circle></svg>
+                                    Iniciar Navegación
+                                </a>
+                            </dd>
+                        </div>
+                    </dl>
+
+                    <div class="mapa" id="mapa" data-mapa-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.18181647413!2d-66.94553222530365!3d10.48529249581884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a5f782f041267%3A0xc47e38f97204968!2sMulti%20Injection%20La%20Paz!5e0!3m2!1ses!2sve!4v1740000000000!5m2!1ses!2sve">
+                        <button type="button" class="mapa-boton" id="mapa-boton">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path><circle cx="12" cy="9" r="3"></circle></svg>
+                            <strong>Ver el mapa</strong>
+                            <small>Lo carga Google y pesa varios cientos de KB. Se abre solo cuando lo necesitas.</small>
+                        </button>
+                        <noscript>
+                            <p class="mapa-noscript"><a href="https://www.google.com/maps/search/?api=1&query=Multi+Injection+La+Paz+F3M2%2BQJ+Caracas" target="_blank" rel="noopener">Abrir la ubicación en Google Maps</a></p>
+                        </noscript>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="footer-links">
-            <a href="#inicio">Inicio</a>
-            <a href="#nosotros">Nosotros</a>
-            <a href="#servicios">Servicios</a>
-            <a href="#contacto">Contacto</a>
-        </div>
-        <p>&copy; 2026 Multi Injection La Paz.</p>
-        <div class="footer-logo">
-            <img src="assets/logo-128.png" width="128" height="126" alt="Logo Multi Injection">
-            <span style="font-weight: 700; color: #aaa;">MULTI INJECTION LA PAZ</span>
+        <div class="wrap">
+            <nav class="footer-links" aria-label="Navegación del pie de página">
+                <a href="#inicio">Inicio</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+            <div class="footer-fondo">
+                <img src="assets/logo-128.png" width="128" height="126" alt="" aria-hidden="true">
+                <span class="footer-marca">Multi Injection<br>La Paz</span>
+            </div>
+            <p class="footer-legal">&copy; 2026 Multi Injection La Paz.</p>
         </div>
     </footer>
 
@@ -1000,6 +1094,49 @@
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.63 1.438h.004c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
     </a>
+
+    <script>
+        // El embed de Google Maps trae varios cientos de KB de JavaScript.
+        // No se pagan hasta que el mapa se necesita: el iframe se monta al
+        // entrar en viewport o al tocar el marcador, lo que ocurra primero.
+        (function () {
+            var caja = document.getElementById('mapa');
+            if (!caja) return;
+
+            var montado = false;
+
+            function montar() {
+                if (montado) return;
+                montado = true;
+
+                var marco = document.createElement('iframe');
+                marco.src = caja.getAttribute('data-mapa-src');
+                marco.title = 'Mapa de ubicación de Multi Injection La Paz';
+                marco.loading = 'lazy';
+                marco.referrerPolicy = 'no-referrer-when-downgrade';
+                marco.setAttribute('allowfullscreen', '');
+
+                caja.textContent = '';
+                caja.appendChild(marco);
+            }
+
+            var boton = document.getElementById('mapa-boton');
+            if (boton) boton.addEventListener('click', montar);
+
+            if ('IntersectionObserver' in window) {
+                var observador = new IntersectionObserver(function (entradas) {
+                    for (var i = 0; i < entradas.length; i++) {
+                        if (entradas[i].isIntersecting) {
+                            montar();
+                            observador.disconnect();
+                            return;
+                        }
+                    }
+                }, { rootMargin: '200px' });
+                observador.observe(caja);
+            }
+        })();
+    </script>
 
 </body>
 </html>
