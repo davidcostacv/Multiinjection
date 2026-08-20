@@ -230,6 +230,23 @@ def _fuente(tam: int, negrita=True):
     return ImageFont.load_default()
 
 
+def construir_icono_ios(logo: Path):
+    """Icono de pantalla de inicio de iOS.
+
+    Safari no respeta la transparencia: la compone sobre negro. Se entrega
+    ya compuesto sobre el grafito del propio logo.
+    """
+    lado = 180
+    lienzo = Image.new("RGB", (lado, lado), (34, 40, 42))   # --ink-700
+    marca = Image.open(logo).convert("RGBA")
+    marca.thumbnail((lado - 26, lado - 26), Image.Resampling.LANCZOS)
+    lienzo.paste(marca, ((lado - marca.width) // 2, (lado - marca.height) // 2), marca)
+
+    destino = ASSETS / "apple-touch-icon.png"
+    lienzo.save(destino, "PNG", optimize=True)
+    return destino
+
+
 def construir_og(logo: Path, acento: str):
     W, H = 1200, 630
     lienzo = Image.new("RGB", (W, H), INK_850)
@@ -334,6 +351,9 @@ def main():
         print(f"\n  inyectores  (origen {kb(foto):,.1f} KB)")
         for ruta, dim in construir_fotos(foto, "inyectores"):
             print(f"    {ruta.name:<24} {'{}x{}'.format(*dim):<12} {kb(ruta):>8,.1f} KB")
+
+    icono = construir_icono_ios(ASSETS / "logo.png")
+    print(f"\n  {icono.name:<26} {'180x180':<12} {kb(icono):>8,.1f} KB   (iOS)")
 
     og = construir_og(ASSETS / "logo.png", acento)
     print(f"\n  {og.name:<26} {'1200x630':<12} {kb(og):>8,.1f} KB   (Open Graph)")
