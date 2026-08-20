@@ -213,6 +213,31 @@ def construir_fotos(origen: Path, base: str):
     return salidas
 
 
+def construir_por_lado_largo(origen: Path, base: str, lados=(800, 1200)):
+    """Variantes de una foto vertical, dimensionadas por su lado largo.
+
+    Dimensionar por ancho no sirve aquí: la foto del taller es 3024x4032, así
+    que 1600 de ancho daría 2133 de alto y un archivo desproporcionado para
+    lo que se ve en pantalla.
+    """
+    im = Image.open(origen).convert("RGB")
+    salidas = []
+
+    for lado in lados:
+        v = im.copy()
+        v.thumbnail((lado, lado), Image.Resampling.LANCZOS)
+
+        webp = ASSETS / f"{base}-{lado}.webp"
+        v.save(webp, "WEBP", quality=76, method=6)
+        salidas.append((webp, v.size))
+
+        jpg = ASSETS / f"{base}-{lado}.jpg"
+        v.save(jpg, "JPEG", quality=78, optimize=True, progressive=True)
+        salidas.append((jpg, v.size))
+
+    return salidas
+
+
 def construir_hero(origen: Path):
     """Foto de fondo del hero, servida desde el propio dominio.
 
@@ -376,6 +401,12 @@ def main():
     if foto.exists() and formato_real(foto) == "JPEG":
         print(f"\n  inyectores  (origen {kb(foto):,.1f} KB)")
         for ruta, dim in construir_fotos(foto, "inyectores"):
+            print(f"    {ruta.name:<24} {'{}x{}'.format(*dim):<12} {kb(ruta):>8,.1f} KB")
+
+    taller = SRC / "taller.jpg"
+    if taller.exists():
+        print(f"\n  taller  (origen {kb(taller):,.1f} KB, convertido del HEIC con ffmpeg)")
+        for ruta, dim in construir_por_lado_largo(taller, "taller"):
             print(f"    {ruta.name:<24} {'{}x{}'.format(*dim):<12} {kb(ruta):>8,.1f} KB")
 
     hero = SRC / "hero-original.jpg"
