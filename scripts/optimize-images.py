@@ -213,6 +213,32 @@ def construir_fotos(origen: Path, base: str):
     return salidas
 
 
+def construir_hero(origen: Path):
+    """Foto de fondo del hero, servida desde el propio dominio.
+
+    Va debajo de una capa oscura al 74-80%, así que admite bastante más
+    compresión que una foto que se mira de frente. Aun así se queda en
+    calidad 70 y no menos: el degradado oscuro es justo donde aparecería el
+    banding, y ahorrar 3 KB no compensa una franja visible en el titular.
+    """
+    im = Image.open(origen).convert("RGB")
+    salidas = []
+
+    for ancho in (ANCHO_MOVIL, 1600):
+        alto = round(im.height * ancho / im.width)
+        v = im.resize((ancho, alto), Image.Resampling.LANCZOS)
+
+        webp = ASSETS / f"hero-{ancho}.webp"
+        v.save(webp, "WEBP", quality=70, method=6)
+        salidas.append((webp, v.size))
+
+        jpg = ASSETS / f"hero-{ancho}.jpg"
+        v.save(jpg, "JPEG", quality=70, optimize=True, progressive=True)
+        salidas.append((jpg, v.size))
+
+    return salidas
+
+
 # --------------------------------------------------------------------------
 # 4. imagen para compartir por WhatsApp (Open Graph 1200x630)
 # --------------------------------------------------------------------------
@@ -350,6 +376,12 @@ def main():
     if foto.exists() and formato_real(foto) == "JPEG":
         print(f"\n  inyectores  (origen {kb(foto):,.1f} KB)")
         for ruta, dim in construir_fotos(foto, "inyectores"):
+            print(f"    {ruta.name:<24} {'{}x{}'.format(*dim):<12} {kb(ruta):>8,.1f} KB")
+
+    hero = SRC / "hero-original.jpg"
+    if hero.exists():
+        print(f"\n  hero  (origen {kb(hero):,.1f} KB, descargado de Unsplash)")
+        for ruta, dim in construir_hero(hero):
             print(f"    {ruta.name:<24} {'{}x{}'.format(*dim):<12} {kb(ruta):>8,.1f} KB")
 
     icono = construir_icono_ios(ASSETS / "logo.png")

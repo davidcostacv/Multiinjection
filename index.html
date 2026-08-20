@@ -31,8 +31,9 @@
     <link rel="icon" href="assets/logo-128.png" type="image/png" sizes="128x128">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180">
 
-    <!-- El hero carga su foto desde Unsplash: abrir la conexión desde ya. -->
-    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <!-- Foto del hero: Unsplash, photo-1486006920555-c77dcf18193c.
+         Descargada y servida desde este dominio; la licencia de Unsplash lo
+         permite. Se regenera con scripts/optimize-images.py. -->
 
     <script type="application/ld+json">
     {
@@ -417,6 +418,10 @@
             /* La sangría lateral la pone .wrap; sin esto el hero hereda
                también el padding de la regla `section` y sangra dos veces. */
             padding-inline: 0;
+            /* Foto del hero, servida desde este dominio. El JPG es la base:
+               si el navegador no entiende image-set(), se queda con esto en
+               vez de quedarse sin fondo. */
+            --hero-foto: url('assets/hero-800.jpg');
             /* Color de base: en 3G el hero se ve correcto desde el primer frame,
                sin destello blanco mientras baja la foto. */
             background-color: var(--ink-900);
@@ -425,7 +430,7 @@
                     rgba(11, 14, 15, 0.74) 0%,
                     rgba(11, 14, 15, 0.80) 58%,
                     var(--ink-850) 100%),
-                url('https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&q=80&w=1920');
+                var(--hero-foto);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -958,8 +963,28 @@
             nav ul { gap: 6px; }
             nav a { font-size: 0.78rem; padding: 4px 14px; }
             .hero-eyebrow { font-size: 0.72rem; }
+            .hero { --hero-foto: url('assets/hero-1600.jpg'); }
         }
 
+        /* WebP para el hero cuando el navegador lo soporta. Va en @supports
+           porque un navegador que no entienda image-set() invalidaría toda la
+           declaración de background-image y el hero se quedaría sin foto.
+           17.2 KB en móvil contra los 30.9 KB del JPG. */
+        @supports (background-image: image-set(url("a.webp") type("image/webp"))) {
+            .hero {
+                --hero-foto: image-set(
+                    url('assets/hero-800.webp') type('image/webp'),
+                    url('assets/hero-800.jpg') type('image/jpeg'));
+            }
+
+            @media (min-width: 900px) {
+                .hero {
+                    --hero-foto: image-set(
+                        url('assets/hero-1600.webp') type('image/webp'),
+                        url('assets/hero-1600.jpg') type('image/jpeg'));
+                }
+            }
+        }
     </style>
 </head>
 <body>
@@ -1075,12 +1100,15 @@
                 </ol>
                 <figure class="servicios-figura">
                     <picture>
-                        <source type="image/webp"
-                                srcset="assets/inyectores-800.webp 800w, assets/inyectores.webp 1284w"
-                                sizes="(min-width: 860px) 820px, 100vw">
-                        <img src="assets/inyectores-800.jpg"
-                             srcset="assets/inyectores-800.jpg 800w, assets/inyectores.jpg 1284w"
-                             sizes="(min-width: 860px) 820px, 100vw"
+                        <!-- Por debajo de 860px se fuerza la variante de 800px,
+                             sin importar el DPR del teléfono. Con srcset+sizes,
+                             un equipo con DPR 2 pedía la de 1284px: 80 KB en
+                             vez de 47, para un hueco de 318px. En gama media
+                             con datos caros, legible gana a nítida. -->
+                        <source media="(max-width: 859px)" type="image/webp" srcset="assets/inyectores-800.webp">
+                        <source media="(max-width: 859px)" srcset="assets/inyectores-800.jpg">
+                        <source type="image/webp" srcset="assets/inyectores.webp">
+                        <img src="assets/inyectores.jpg"
                              width="800" height="869" loading="lazy" decoding="async"
                              alt="Ficha de servicio de limpieza de inyectores: limpieza por ultrasonido, cambio de gorrines y microfiltros y prueba en la máquina, para motores de 4, 6 y 8 cilindros, Blazer Vortec, Pulpo y Araña, y sistemas TBI">
                     </picture>
