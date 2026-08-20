@@ -360,6 +360,10 @@
             gap: 10px;
             text-decoration: none;
             flex-shrink: 0;
+            /* El área táctil llega a 44x44 creciendo hacia el hueco de la
+               derecha; la marca no se mueve un píxel. */
+            min-width: 44px;
+            min-height: 44px;
         }
 
         .logo img {
@@ -379,8 +383,11 @@
         }
 
         nav a {
-            display: block;
-            padding: 8px 7px;
+            /* 44px de alto mínimo: el header mide 60, así que entra holgado. */
+            display: flex;
+            align-items: center;
+            min-height: 44px;
+            padding: 4px 7px;
             text-decoration: none;
             color: var(--text-2);
             font-family: var(--font-titulo);
@@ -809,6 +816,9 @@
         }
 
         .footer-links a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
             color: var(--text-2);
             text-decoration: none;
             font-family: var(--font-titulo);
@@ -816,7 +826,7 @@
             font-weight: 700;
             letter-spacing: 0.07em;
             text-transform: uppercase;
-            padding: 10px 8px;
+            padding: 4px 8px;
             transition: color var(--transition);
         }
 
@@ -899,7 +909,7 @@
                 color: var(--accent);
             }
 
-            nav a { font-size: 0.72rem; padding: 8px 10px; }
+            nav a { font-size: 0.72rem; padding: 4px 10px; }
             .hero-eyebrow { font-size: 0.68rem; }
         }
 
@@ -946,7 +956,7 @@
             .mapa { height: 500px; }
             .logo img { height: 46px; }
             nav ul { gap: 6px; }
-            nav a { font-size: 0.78rem; padding: 10px 14px; }
+            nav a { font-size: 0.78rem; padding: 4px 14px; }
             .hero-eyebrow { font-size: 0.72rem; }
         }
 
